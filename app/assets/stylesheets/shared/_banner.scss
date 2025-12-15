@@ -1,3 +1,7 @@
+$primary-blue: #193A6A;
+$dark-blue: #0D2442;
+$light-bg: #F1EFEF;
+
 .banner {
   width: 925px;
   height: 402px;
@@ -12,12 +16,33 @@
   justify-content: center;
 }
 
-.search-bar-container {
+.banner-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 95%;
+  margin-top: -150px;
+
+  img {
+    width: 50px;
+    height: 40px;
+  }
+}
+
+.site-title-banner {
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  font-family: 'Lovelo';  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-bar-container {
+  width: 100%;
   max-width: 900px;
   display: flex;
   margin: auto;
-  margin-top: 120px;
 }
 
 .search-bar {
