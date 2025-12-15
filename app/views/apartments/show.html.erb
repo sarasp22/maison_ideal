@@ -1,0 +1,9 @@
+<h1><%= @apartment.title %></h1>
+<p><%= @apartment.description %></p>
+<p>Guests: <%= @apartment.guests %></p>
+<p>Address: <%= @apartment.address %></p>
+<p>Price: <%= number_to_currency(@apartment.price) %></p>
+
+   <% if apartment.photo.attached? %>
+      <%= image_tag apartment.photo.url, class: "card-img-top rounded" %>
+    <% end %>

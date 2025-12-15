@@ -1,0 +1,46 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="banner">
+  <div class="search-bar-container">
+    <%= form_with url: apartments_path, method: :get, local: true do |f| %>
+      <%= f.text_field :query, placeholder: "Search for flats...", class: "search-bar" %>
+      <%= f.submit "Search", class: "search-button" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="container-flats">
+  <div class="card-container">
+    <% @apartments.each do |apartment| %>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card-flat">
+
+   <% if apartment.photo.attached? %>
+      <%= image_tag apartment.photo.url, class: "card-img-top rounded" %>
+    <% end %>
+
+          <div class="card-body-custom">
+            <h3><%= apartment.title %></h3>
+            <p class="address"><%= apartment.address %></p>
+
+            <div class="details">
+              <%= render apartment %>
+            </div>
+          </div>
+
+          <div class="card-footer-custom">
+            <div class="card-links">
+              <%= link_to "Show Apartment", apartment_path(apartment), class: "custom-btn-pill-small" %>
+
+              <div class="d-flex gap-3">
+                <%= link_to "Edit", edit_apartment_path(apartment), class: "edit" %>
+                <%= link_to "Remove", apartment_path(apartment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "remove" %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

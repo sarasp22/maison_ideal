@@ -1,0 +1,49 @@
+<footer class="custom-footer mt-5">
+  <div class="container py-4 py-md-5">
+
+    <div class="row">
+
+      <div class="col-12 col-md-3 mb-4 mb-md-0">
+        <%= link_to apartments_path, class: "footer-brand d-inline-block mb-3" do %>
+          <%= image_tag "logo.png", alt: "Logo", class: "logo" %>
+        <% end %>
+        <p class="text-muted small">© <%= Time.now.year %> Maison Ideal. Tutti i diritti riservati.</p>
+      </div>
+
+      <div class="col-6 col-md-2 mb-4 mb-md-0">
+        <h5 class="footer-title">Azienda</h5>
+        <ul class="footer-links list-unstyled">
+          <li><%= link_to "About Us", "#" %></li>
+          <li><%= link_to "Careers", "#" %></li>
+          <li><%= link_to "Blog", "#" %></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-2 mb-4 mb-md-0">
+        <h5 class="footer-title">Supporto</h5>
+        <ul class="footer-links list-unstyled">
+          <li><%= link_to "Help Center", "#" %></li>
+          <li><%= link_to "FAQ", "#" %></li>
+          <li><%= link_to "Contatti", "#" %></li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-5">
+        <h5 class="footer-title">Iscriviti alla Newsletter</h5>
+
+        <form class="footer-search d-flex mt-3">
+          <div class="input-group">
+            <input type="email" class="form-control footer-input" placeholder="La tua email...">
+            <button class="btn footer-search-btn" type="submit">Iscriviti</button>
+          </div>
+        </form>
+
+        <div class="social-icons mt-3 d-flex gap-3">
+            <i class="bi bi-twitter footer-icon"></i>
+            <i class="bi bi-facebook footer-icon"></i>
+            <i class="bi bi-instagram footer-icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,115 @@
+$primary-blue: #193A6A;
+$dark-blue: #0D2442;
+$light-bg: #F1EFEF;
+
+.container-flats {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 10px;
+    justify-content: center;
+}
+
+.card-flat {
+    background: $light-bg;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba($dark-blue, 0.2);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    height: 100%;
+}
+
+.card-flat:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+}
+
+.card-body-custom {
+    padding: 16px;
+    flex-grow: 1;
+}
+
+.card-flat h3 {
+    margin-bottom: 4px;
+    font-size: 1.2rem;
+    color: $dark-blue;
+    font-weight: 600;
+}
+
+.card-flat .address {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.card-flat .details {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba($primary-blue, 0.1);
+}
+
+.card-footer-custom {
+    padding: 10px 16px;
+    border-top: 1px solid rgba($dark-blue, 0.1);
+    background-color: darken($light-bg, 3%);
+    margin-top: auto;
+}
+
+.card-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.custom-btn-pill-small {
+    background-color: $primary-blue;
+    color: white;
+    border-radius: 50px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid $primary-blue;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: $dark-blue;
+        border-color: $dark-blue;
+        color: white;
+    }
+}
+
+.card-links a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.card-links a.edit {
+    color: #ffc107;
+}
+
+.card-links a.remove {
+    color: #dc3545;
+}
