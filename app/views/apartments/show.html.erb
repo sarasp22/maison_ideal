@@ -12,25 +12,25 @@
       <h1><%= @apartment.title %></h1>
       <p class="address"><%= @apartment.address %></p>
 
-      <h3>Descrizione</h3>
+      <h3>Description</h3>
       <p><%= @apartment.description %></p>
 
       <div class="mt-4 pt-3 border-top">
-        <%= link_to "Modifica Appartamento", edit_apartment_path(@apartment), class: "btn btn-outline-secondary me-2" %>
-        <%= link_to "Torna all'elenco", apartments_path, class: "btn btn-light" %>
+        <%= link_to "Edit apartment", edit_apartment_path(@apartment), class: "btn btn-outline-secondary me-2" %>
+        <%= link_to "Back", apartments_path, class: "btn btn-light" %>
       </div>
     </div>
 
     <div class="details-card">
-      <h2>Dettagli Chiave</h2>
+      <h2>Details</h2>
 
       <div class="detail-line">
-        <span class="detail-label"><i class="bi bi-people-fill"></i> Ospiti</span>
+        <span class="detail-label"><i class="bi bi-people-fill"></i> Guests</span>
         <span class="detail-value"><%= @apartment.guests %></span>
       </div>
 
       <div class="detail-line price">
-        <span class="detail-label"><i class="bi bi-tag-fill"></i> Prezzo Notte</span>
+        <span class="detail-label"><i class="bi bi-tag-fill"></i> Night rate</span>
         <span class="detail-value"><%= number_to_currency(@apartment.price, unit: "€", separator: ",", delimiter: ".") %></span>
       </div>
 
