@@ -2,13 +2,12 @@ $primary-color: #193A6A;
 $background-light: #F1EFEF;
 $hover-dark: #0D2442;
 $link-color: #193A6A;
-$font-family-sans-serif: 'Inter', sans-serif;
+
 
 .custom-navbar {
   background-color: $background-light;
   padding: 10px 0;
   border-bottom: 1px solid rgba($primary-color, 0.1);
-  font-family: $font-family-sans-serif;
 }
 
 .logo {
