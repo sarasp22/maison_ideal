@@ -37,8 +37,10 @@
             </div>
 
             <ul class="dropdown-menu dropdown-menu-end">
-              <h6 class="dropdown-header fw-bold">Welcome, <%= current_user.email.split('@').first %></h6>
-              <h6 class="dropdown-header small text-muted">Role: <%= current_user.role.capitalize %></h6>
+             <h6 class="dropdown-header fw-bold">Welcome, <%= current_user.email.split('@').first %></h6>
+
+              <h6 class="dropdown-header small text-muted">Role: <%= current_user.role.to_s.capitalize %></h6>
+
               <li><hr class="dropdown-divider"></li>
 
               <li><%= link_to "Profile", "#", class: "dropdown-item" %></li>
