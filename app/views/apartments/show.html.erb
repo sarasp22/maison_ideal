@@ -1,9 +1,40 @@
-<h1><%= @apartment.title %></h1>
-<p><%= @apartment.description %></p>
-<p>Guests: <%= @apartment.guests %></p>
-<p>Address: <%= @apartment.address %></p>
-<p>Price: <%= number_to_currency(@apartment.price) %></p>
+<div class="apartment-show-container">
 
-   <% if apartment.photo.attached? %>
-      <%= image_tag apartment.photo.url, class: "card-img-top rounded" %>
-    <% end %>
+  <% if @apartment.photo.attached? %>
+    <div class="main-photo-wrapper">
+      <%= image_tag @apartment.photo.url, alt: @apartment.title %>
+    </div>
+  <% end %>
+
+  <div class="show-content-grid">
+
+    <div class="description-section">
+      <h1><%= @apartment.title %></h1>
+      <p class="address"><%= @apartment.address %></p>
+
+      <h3>Descrizione</h3>
+      <p><%= @apartment.description %></p>
+
+      <div class="mt-4 pt-3 border-top">
+        <%= link_to "Modifica Appartamento", edit_apartment_path(@apartment), class: "btn btn-outline-secondary me-2" %>
+        <%= link_to "Torna all'elenco", apartments_path, class: "btn btn-light" %>
+      </div>
+    </div>
+
+    <div class="details-card">
+      <h2>Dettagli Chiave</h2>
+
+      <div class="detail-line">
+        <span class="detail-label"><i class="bi bi-people-fill"></i> Ospiti</span>
+        <span class="detail-value"><%= @apartment.guests %></span>
+      </div>
+
+      <div class="detail-line price">
+        <span class="detail-label"><i class="bi bi-tag-fill"></i> Prezzo Notte</span>
+        <span class="detail-value"><%= number_to_currency(@apartment.price, unit: "€", separator: ",", delimiter: ".") %></span>
+      </div>
+
+      </div>
+
+  </div>
+</div>
