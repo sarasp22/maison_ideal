@@ -2,57 +2,32 @@ $primary-color: #193A6A;
 $background-light: #F1EFEF;
 $hover-dark: #0D2442;
 $link-color: #193A6A;
+$font-family-sans-serif: 'Inter', sans-serif;
 
 .custom-navbar {
   background-color: $background-light;
   padding: 10px 0;
   border-bottom: 1px solid rgba($primary-color, 0.1);
+  font-family: $font-family-sans-serif;
+}
+
+.logo {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
 }
 
 .navbar-nav .nav-link {
   color: $link-color;
   font-weight: 500;
-  margin-right: 15px;
-  padding: 8px 10px;
-  transition: color 0.3s ease;
+  padding: 8px 12px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: 6px;
 }
 
 .navbar-nav .nav-link:hover {
   color: $hover-dark;
-}
-
-.navbar-btn {
-  border-radius: 50px;
-  padding: 8px 22px;
-  font-weight: 500;
-  line-height: 1.2;
-  height: auto;
-  margin: 0;
-}
-
-.custom-btn-pill {
-  @extend .navbar-btn;
-  background-color: $primary-color;
-  color: white;
-  border: 2px solid $primary-color;
-
-  &:hover {
-    background-color: $hover-dark;
-    border-color: $hover-dark;
-    color: white;
-  }
-}
-
-.custom-btn-outline {
-  @extend .navbar-btn;
-  color: $primary-color;
-  border: 2px solid $primary-color;
-  background-color: transparent;
-
-  &:hover {
-    background-color: $primary-color;
-    color: white;
-  }
+  background-color: rgba($primary-color, 0.05);
 }
 
 .profile-icon {
@@ -67,14 +42,59 @@ $link-color: #193A6A;
   color: $primary-color;
   font-size: 20px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
+
+  &:after {
+    display: none;
+  }
 
   &:hover {
     background: darken(#E3E8F0, 5%);
+    transform: scale(1.05);
   }
 }
 
-.logo {
-  width: 40px;
-  height: auto;
+.custom-link-accent {
+  color: $primary-color;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    color: $hover-dark;
+    background-color: rgba($primary-color, 0.1);
+    text-decoration: none;
+  }
+}
+
+.custom-btn-link {
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    background-color: transparent;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: $primary-color;
+        color: white;
+        border-color: $primary-color;
+    }
+}
+
+.custom-logout-item {
+    color: #DC3545;
+
+    &:hover {
+        background-color: rgba(#DC3545, 0.1);
+        color: darken(#DC3545, 10%);
+    }
+}
+
+.dropdown-header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }

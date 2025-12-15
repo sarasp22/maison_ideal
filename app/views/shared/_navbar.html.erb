@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg custom-navbar">
-  <div class="container-fluid container align-items-center"> <%= link_to apartments_path, class: "navbar-brand" do %>
-      <%= image_tag "logo.png", alt: "Logo", class: "logo" %>
+  <div class="container align-items-center">
+    <%= link_to apartments_path, class: "navbar-brand" do %>
+      <span class="visually-hidden">Go to Home</span>
+      <%= image_tag "logo.png", alt: "Site Logo", class: "logo" %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,14 +16,39 @@
         <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Help Center</a></li>
         <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+
+        <% if user_signed_in? && current_user.role == 'host' %>
+            <li class="nav-item d-lg-none mt-2">
+                <%= link_to "Add Apartment", new_apartment_path, class: "nav-link custom-link-accent" %>
+            </li>
+        <% end %>
       </ul>
 
-      <div class="d-flex align-items-center gap-3">
-        <%= link_to "Add Appartment", new_apartment_path, class: "btn custom-btn-pill" %>
+      <div class="d-flex align-items-center gap-3 user-action-area">
 
-        <div class="profile-icon">
-          <i class="bi bi-person"></i>
-        </div>
+        <% if user_signed_in? && current_user.role == 'host' %>
+          <%= link_to "Add Apartment", new_apartment_path, class: "custom-link-accent d-none d-lg-block" %>
+        <% end %>
+
+        <% if user_signed_in? %>
+          <div class="btn-group">
+            <div class="profile-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+               <i class="bi bi-person"></i>
+            </div>
+
+            <ul class="dropdown-menu dropdown-menu-end">
+              <h6 class="dropdown-header fw-bold">Welcome, <%= current_user.email.split('@').first %></h6>
+              <h6 class="dropdown-header small text-muted">Role: <%= current_user.role.capitalize %></h6>
+              <li><hr class="dropdown-divider"></li>
+
+              <li><%= link_to "Profile", "#", class: "dropdown-item" %></li>
+
+              <li><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item custom-logout-item" %></li>
+            </ul>
+          </div>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-sm custom-btn-link" %>
+        <% end %>
       </div>
     </div>
   </div>
