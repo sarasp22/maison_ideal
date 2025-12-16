@@ -11,10 +11,10 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="<% link_to apartments_path %>">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Help Center</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+<li class="nav-item"><a class="nav-link" href="<%= apartments_path %>">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="<%= blog_path %>">Blog</a></li>
+<li class="nav-item"><a class="nav-link" href="<%= contact_path %>">Contact</a></li>
+<li class="nav-item"><a class="nav-link" href="<%= about_path %>">About Us</a></li>
 
         <% if user_signed_in? && current_user.role == 'host' %>
             <li class="nav-item d-lg-none mt-2">
@@ -42,7 +42,7 @@
 
               <li><hr class="dropdown-divider"></li>
 
-              <li><%= link_to "Profile", "#", class: "dropdown-item" %></li>
+              <li><%= link_to "Profile", profile_path, class: "dropdown-item" %></li>
 
               <li><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item custom-logout-item" %></li>
             </ul>

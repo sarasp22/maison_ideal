@@ -1,0 +1,117 @@
+<div class="container mt-5">
+
+  <h1 class="mb-4">Profile</h1>
+
+  <!-- USER INFO -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Personal details</h5>
+
+      <%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
+        <div class="mb-3">
+          <%= f.label :name, "Name", class: "form-label" %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :email, "Email", class: "form-label" %>
+          <%= f.email_field :email, class: "form-control", disabled: true %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+
+  <!-- TENANT SECTION -->
+  <% if @user.tenant? %>
+    <h2 class="mb-3">My bookings</h2>
+
+    <% if @bookings.any? %>
+      <div class="list-group">
+        <% @bookings.each do |booking| %>
+          <div class="list-group-item">
+            <h5><%= booking.apartment.title %></h5>
+            <p>
+              <strong>From:</strong> <%= booking.start_date %> |
+              <strong>To:</strong> <%= booking.end_date %>
+            </p>
+            <p>
+              <strong>Status:</strong> <%= booking.status %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>No bookings yet.</p>
+    <% end %>
+  <% end %>
+
+  <% if @user.host? %>
+
+    <h2 class="mb-3">My apartments</h2>
+
+    <% if @apartments.any? %>
+      <div class="row">
+        <% @apartments.each do |apartment| %>
+          <div class="col-md-4 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><%= apartment.title %></h5>
+                <p class="card-text"><%= apartment.address %></p>
+                <p><strong>€ <%= apartment.price %></strong></p>
+                <%= link_to "View", apartment_path(apartment), class: "btn btn-outline-primary btn-sm" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>You haven't listed any apartments yet.</p>
+    <% end %>
+
+    <h2 class="mt-5 mb-3">Bookings received</h2>
+
+    <% if @received_bookings.any? %>
+      <div class="list-group">
+        <% @received_bookings.each do |booking| %>
+          <div class="list-group-item">
+            <h5><%= booking.apartment.title %></h5>
+            <p>
+              <strong>Guest:</strong> <%= booking.user.name || booking.user.email %>
+            </p>
+            <p>
+              <strong>From:</strong> <%= booking.start_date %> |
+              <strong>To:</strong> <%= booking.end_date %>
+            </p>
+            <p>
+              <strong>Status:</strong> <%= booking.status %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>No bookings received yet.</p>
+    <% end %>
+
+  <% end %>
+  
+<% if @user.host? %>
+  <%= link_to "My apartments", my_apartments_path, class: "btn btn-outline-primary" %>
+<% end %>
+<div class="d-flex gap-3 mt-3">
+
+  <%= link_to "Change password",
+      edit_user_registration_path,
+      class: "btn btn-outline-primary" %>
+
+  <%= link_to "Delete profile",
+      registration_path(current_user),
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure? This action is irreversible."
+      },
+      class: "btn btn-outline-danger" %>
+
+</div>
+
+</div>

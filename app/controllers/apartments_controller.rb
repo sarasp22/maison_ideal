@@ -50,6 +50,8 @@ class ApartmentsController < ApplicationController
   end
 
   def authorize_host!
-     redirect_to root_path, alert: "Access denied" unless current_user.role == "host"
-  end
+    unless current_user.host? && current_user == @apartment.host
+      redirect_to apartments_path, alert: "You are not authorized to edit this apartment."
+    end
+end
 end
