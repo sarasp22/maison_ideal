@@ -1,0 +1,103 @@
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+
+
+.banner {
+  height: 400px;
+
+  @media (max-width: $breakpoint-md) {
+    height: 300px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    height: 250px;
+  }
+}
+
+.site-title-banner {
+  font-size: 3rem;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.5rem;
+  }
+
+  .logo {
+    width: 80px;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 50px;
+    }
+  }
+}
+
+.search-bar-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 0 20px;
+
+  @media (max-width: $breakpoint-sm) {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+}
+
+.search-bar {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1rem;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+.search-button {
+  padding: 12px 30px;
+  font-size: 1rem;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+.container-flats {
+  padding: 40px 20px;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 20px 10px;
+  }
+}
+
+
+.footer {
+  padding: 40px 20px;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 30px 15px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 20px 10px;
+    text-align: center;
+  }
+}
+
+.alert {
+  margin: 20px;
+
+  @media (max-width: $breakpoint-sm) {
+    margin: 10px;
+    font-size: 0.9rem;
+  }
+}

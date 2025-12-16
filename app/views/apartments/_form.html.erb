@@ -1,46 +1,96 @@
-<%= form_with(model: apartment, local: true) do |form| %>
-  <% if apartment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(apartment.errors.count, "error") %> prohibited this apartment from being saved:</h2>
-      <ul>
-        <% apartment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="apartment-form-wrapper">
+  <div class="apartment-form-container">
+    <div class="form-header-apartment">
+      <h2 class="form-title-apartment"><%= apartment.new_record? ? "Create New Apartment" : "Edit Apartment" %></h2>
+      <p class="form-subtitle">Fill in the details below to list your property</p>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+    <%= form_with(model: apartment, local: true, class: "apartment-form") do |form| %>
+      <% if apartment.errors.any? %>
+        <div class="error-alert">
+          <div class="error-alert-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <strong><%= pluralize(apartment.errors.count, "error") %> found</strong>
+          </div>
+          <ul class="error-list">
+            <% apartment.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+      <div class="form-grid">
+        <div class="form-field full-width">
+          <%= form.label :title, class: "form-label-apartment" %>
+          <%= form.text_field :title, class: "form-input-apartment", placeholder: "e.g., Cozy Studio in Downtown Paris" %>
+        </div>
 
-  <div>
-    <%= form.label :guests, "Number of Guests" %>
-    <%= form.number_field :guests, min: 1 %>
-  </div>
+        <div class="form-field full-width">
+          <%= form.label :description, class: "form-label-apartment" %>
+          <%= form.text_area :description, class: "form-textarea-apartment", rows: 5, placeholder: "Describe your apartment, amenities, and what makes it special..." %>
+        </div>
 
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
+        <div class="form-field">
+          <%= form.label :guests, "Number of Guests", class: "form-label-apartment" %>
+          <div class="input-with-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <%= form.number_field :guests, min: 1, class: "form-input-apartment with-icon", placeholder: "1" %>
+          </div>
+        </div>
 
-  <div>
-    <%= form.label :price %>
-    <%= form.number_field :price, step: 0.01 %>
-  </div>
+        <div class="form-field">
+          <%= form.label :price, "Price per Night (€)", class: "form-label-apartment" %>
+          <div class="input-with-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            <%= form.number_field :price, step: 0.01, class: "form-input-apartment with-icon", placeholder: "0.00" %>
+          </div>
+        </div>
 
-  <div>
-    <%= form.label :photo, "Upload a photo" %>
-    <%= form.file_field :photo %>
-  </div>
+        <div class="form-field full-width">
+          <%= form.label :address, class: "form-label-apartment" %>
+          <div class="input-with-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <%= form.text_field :address, class: "form-input-apartment with-icon", placeholder: "123 Rue de la Paix, Paris" %>
+          </div>
+        </div>
 
-  <div>
-    <%= form.submit %>
+        <div class="form-field full-width">
+          <%= form.label :photo, "Upload Photos", class: "form-label-apartment" %>
+          <div class="file-upload-wrapper">
+            <%= form.file_field :photo, class: "file-input-hidden", id: "apartment_photo_input", accept: "image/*" %>
+            <label for="apartment_photo_input" class="file-upload-label">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span class="file-upload-text">Click to upload or drag and drop</span>
+              <span class="file-upload-hint">PNG, JPG, GIF up to 10MB</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions-apartment">
+        <%= link_to "Cancel", apartments_path, class: "btn-secondary-apartment" %>
+        <%= form.submit apartment.new_record? ? "Create Apartment" : "Update Apartment", class: "btn-primary-apartment" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
