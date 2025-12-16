@@ -60,7 +60,7 @@ margin-bottom: 4px;
 
 .card-flat .details {
     font-size: 0.9rem;
-    display: flex;
+    display: block;
     justify-content: space-between;
     margin-top: 10px;
     padding-top: 10px;
@@ -70,7 +70,7 @@ margin-bottom: 4px;
 .card-footer-custom {
     padding: 8px 16px;
     border-top: 1px solid rgba($dark-blue, 0.1);
-    background-color: darken($light-bg, 3%);
+    background-color: #DBE2EF;
     margin-top: auto;
 }
 
@@ -93,9 +93,9 @@ margin-bottom: 4px;
     transition: all 0.2s ease;
 
     &:hover {
-        background-color: $dark-blue;
-        border-color: $dark-blue;
+        background-color: #3F72AF !important;
         color: white;
+        border-color: $dark-blue;
     }
 }
 
