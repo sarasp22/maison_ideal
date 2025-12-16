@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: { tenant: "tenant", host: "host" }
+  enum role: { tenant: 0, host: 1 }
 
   has_many :apartments, foreign_key: :host_id, dependent: :destroy
   has_many :reviews, dependent: :destroy
@@ -10,5 +10,13 @@ class User < ApplicationRecord
   has_many :payments, dependent: :destroy
 
   has_one_attached :avatar
+
+  def host?
+    role == "host"
+  end
+
+  def tenant?
+    role == "tenant"
+  end
 
 end
