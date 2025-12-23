@@ -11,12 +11,4 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  def host?
-    role == "host"
-  end
-
-  def tenant?
-    role == "tenant"
-  end
-
 end
