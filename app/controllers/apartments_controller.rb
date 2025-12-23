@@ -1,5 +1,4 @@
 class ApartmentsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
   before_action :authorize_host!, only: [:new, :create, :edit, :update, :destroy]
 

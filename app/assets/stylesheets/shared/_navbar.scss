@@ -209,48 +209,69 @@ $link-color: #193A6A;
 }
 
 .custom-btn-link {
-  padding: 10px 24px;
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 15px;
-  color: $primary-color;
-  border: 2px solid $primary-color;
-  background-color: transparent;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba($primary-color, 0.1);
   position: relative;
   overflow: hidden;
 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgb(25, 58, 106) !important;
+  color: white !important;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  padding: 10px 18px !important;
+  border-radius: 999px;
+
+  border: 1px solid rgb(25, 58, 106);
+  border-radius: 50px 50px  !important;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 50%;
-    left: 50%;
+    inset: 50% auto auto 50%;
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: $primary-color;
+    background-color: $primary-color;
     transform: translate(-50%, -50%);
-    transition: width 0.4s ease, height 0.4s ease;
+    transition: width 0.45s ease, height 0.45s ease;
     z-index: -1;
   }
 
   &:hover {
-    color: white;
-    border-color: $primary-color;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba($primary-color, 0.3);
+    border-color: $primary-color;
+    box-shadow: 0 8px 24px rgba($primary-color, 0.25);
+  }
 
-    &::before {
-      width: 300px;
-      height: 300px;
-    }
+  &:hover::before {
+    width: 220%;
+    height: 220%;
   }
 
   &:active {
     transform: translateY(0);
+    box-shadow: 0 4px 12px rgba($primary-color, 0.25);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.35);
   }
 }
+
 
 .custom-logout-item {
   color: #DC3545;
@@ -280,7 +301,6 @@ $link-color: #193A6A;
   border-top: 1px solid rgba($primary-color, 0.1);
 }
 
-// Responsive improvements
 @media (max-width: 991px) {
   .navbar-collapse {
     background: white;

@@ -1,26 +1,52 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-user = User.create(email: "host@example.com", password: "password", role: "host", name: "Mario Rossi")
+puts "🧹 Cleaning database..."
 
-apartment = Apartment.create(
+Booking.destroy_all
+Apartment.destroy_all
+User.destroy_all
+
+puts "👤 Creating users..."
+
+host = User.create!(
+  email: "host@example.com",
+  password: "password",
+  role: :host,
+  name: "Mario Host"
+)
+
+tenant = User.create!(
+  email: "tenant@example.com",
+  password: "password",
+  role: :tenant,
+  name: "Mario Tenant"
+)
+
+puts "🏠 Creating apartment..."
+
+apartment = host.apartments.create!(
   title: "Cozy Flat",
   description: "A nice apartment in the city center",
   address: "123 Main Street",
   price: 100,
-  host: user
+  guests: 2
 )
 
-booking = apartment.bookings.create(
+puts "📅 Creating booking..."
+
+booking = apartment.bookings.create!(
   start_date: Date.today,
   end_date: Date.today + 3,
   total_price: 300,
   status: "pending",
-  user: user
+  user: tenant
 )
+
+puts "💰 Creating payment..."
+
+Payment.create!(
+  amount: booking.total_price,
+  status: "pending",
+  booking: booking,
+  user: tenant
+)
+
+puts "✅ Seed completed!"
