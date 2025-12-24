@@ -2,7 +2,6 @@
 
   <h1 class="mb-4">Profile</h1>
 
-  <!-- USER INFO -->
   <div class="card mb-4">
     <div class="card-body">
       <h5 class="card-title">Personal details</h5>
@@ -94,7 +93,7 @@
     <% end %>
 
   <% end %>
-  
+
 <% if @user.host? %>
   <%= link_to "My apartments", my_apartments_path, class: "btn btn-outline-primary" %>
 <% end %>
