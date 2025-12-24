@@ -1,0 +1,15 @@
+<h2>Book <%= @apartment.title %></h2>
+
+<%= form_with model: [@apartment, @booking], local: true do |f| %>
+  <div>
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+
+  <div>
+    <%= f.label :end_date %>
+    <%= f.date_field :end_date %>
+  </div>
+
+<%= f.submit "Book now", class: "btn btn-primary mt-2" %>
+<% end %>

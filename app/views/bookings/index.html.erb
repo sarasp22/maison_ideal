@@ -1,0 +1,14 @@
+<h2>My Bookings</h2>
+
+<% if @bookings.any? %>
+  <% @bookings.each do |booking| %>
+    <div class="booking-card mb-3 p-2 border rounded">
+      <p>Apartment: <%= link_to booking.apartment.title, apartment_path(booking.apartment) %></p>
+      <p>From: <%= booking.start_date %> To: <%= booking.end_date %></p>
+      <p>Total: <%= number_to_currency(booking.total_price, unit: "€") %></p>
+      <p>Status: <%= booking.status %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>You have no bookings yet.</p>
+<% end %>

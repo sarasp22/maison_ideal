@@ -2,7 +2,7 @@
 
   <% if @apartment.photo.attached? %>
     <div class="main-photo-wrapper">
-      <%= image_tag @apartment.photo.url, alt: @apartment.title %>
+      <%= image_tag @apartment.photo, alt: @apartment.title %>
     </div>
   <% end %>
 
@@ -36,7 +36,35 @@
         <span class="detail-value"><%= number_to_currency(@apartment.price, unit: "€", separator: ",", delimiter: ".") %></span>
       </div>
 
+
+<% if user_signed_in? && current_user.tenant? %>
+  <div class="booking-form-container mt-4">
+    <h3>Book this apartment</h3>
+
+    <%= form_with model: [@apartment, @booking],
+              local: true,
+              data: { turbo: false } do |f| %>
+      <div class="form-group">
+        <%= f.label :start_date %>
+        <%= f.date_field :start_date, min: Date.today, class: "form-control", required: true %>
       </div>
+
+      <div class="form-group">
+        <%= f.label :end_date %>
+        <%= f.date_field :end_date, min: Date.today + 1, class: "form-control", required: true %>
+      </div>
+
+      <%= f.submit "Book now", class: "btn btn-primary mt-2" %>
+    <% end %>
+  </div>
+
+<% elsif !user_signed_in? %>
+
+<% end %>
+
+
+
+</div>      </div>
 
   </div>
 </div>

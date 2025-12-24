@@ -1,18 +1,22 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
 
-def show
-  @user = current_user
+ def show
+    @user = current_user
 
-  if @user.tenant?
-    @bookings = @user.bookings.includes(:apartment)
-  elsif @user.host?
-    @apartments = @user.apartments
-    @received_bookings = Booking.joins(:apartment)
-                                .where(apartments: { host_id: @user.id })
-                                .includes(:user, :apartment)
+    if @user.tenant?
+      @bookings = @user.bookings.includes(:apartment)
+    end
+
+    if @user.host?
+      @apartments = @user.apartments
+
+      @received_bookings = Booking
+        .joins(:apartment)
+        .where(apartments: { host_id: @user.id })
+        .includes(:user, :apartment)
+    end
   end
-end
 
 
   def update
