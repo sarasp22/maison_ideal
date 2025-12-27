@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get "profile", to: "profiles#show", as: :profile
   patch "profile", to: "profiles#update"
 
-  get "my_apartments", to: "apartments#my_apartments", as: :my_apartments
+get 'my_apartments', to: 'apartments#my_apartments', as: :my_apartments
+resources :apartments
 
   resources :apartments do
     resources :bookings, only: [:create]
