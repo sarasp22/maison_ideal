@@ -44,6 +44,10 @@ end
     redirect_to apartments_path, notice: "Apartment deleted."
   end
 
+def my_apartments
+  @apartments = current_user.apartments
+end
+
   private
 
   def set_apartment
