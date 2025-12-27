@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :photos, only: [:create, :destroy]
   end
 
-  resources :bookings, only: [:index, :show] do
+  resources :bookings, only: [:create, :edit, :update, :destroy] do
     resources :payments, only: [:new, :create]
   end
 
