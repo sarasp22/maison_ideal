@@ -9,7 +9,6 @@ before_action :authorize_owner!, only: %i[edit update destroy]
 
 def show
   @apartment = Apartment.find(params[:id])
-  # Se @booking non esiste già (magari passato dal render di BookingsController), ne creiamo uno nuovo
   @booking ||= Booking.new
 end
 

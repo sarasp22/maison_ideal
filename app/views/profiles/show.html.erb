@@ -4,13 +4,11 @@
   <div class="card mb-4">
     <div class="card-body">
       <h5 class="card-title">Personal details</h5>
-
       <%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
         <div class="mb-3">
           <%= f.label :name, "Name", class: "form-label" %>
           <%= f.text_field :name, class: "form-control" %>
         </div>
-
         <div class="mb-3">
           <%= f.label :email, "Email", class: "form-label" %>
           <%= f.email_field :email, class: "form-control", disabled: true %>
@@ -20,7 +18,7 @@
   </div>
 
   <% if @user.tenant? %>
-    <div class="bookings-section">
+    <div class="bookings-section mb-5">
       <div class="section-header-bookings">
         <h2>My Bookings</h2>
         <span class="bookings-count"><%= @bookings.count %> <%= @bookings.count == 1 ? 'booking' : 'bookings' %></span>
@@ -32,16 +30,10 @@
             <div class="booking-card <%= booking.status %>">
               <div class="booking-header">
                 <% if booking.apartment.photo.attached? %>
-                  <%= image_tag booking.apartment.photo.url, class: "booking-image", alt: booking.apartment.title %>
+                  <%= image_tag booking.apartment.photo, class: "booking-image", alt: booking.apartment.title %>
                 <% else %>
-                  <div class="booking-image-placeholder">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                    </svg>
-                  </div>
+                  <div class="booking-image-placeholder">🏠</div>
                 <% end %>
-
                 <div class="booking-status-badge <%= booking.status %>">
                   <%= booking.status.capitalize %>
                 </div>
@@ -49,95 +41,30 @@
 
               <div class="booking-body">
                 <h3 class="booking-title"><%= booking.apartment.title %></h3>
-                <p class="booking-address">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  <%= booking.apartment.address %>
-                </p>
-
+                <p class="booking-address"><%= booking.apartment.address %></p>
                 <div class="booking-dates">
                   <div class="date-item">
                     <span class="date-label">Check-in</span>
-                    <span class="date-value">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                      </svg>
-                      <%= booking.start_date.strftime("%d %b %Y") %>
-                    </span>
+                    <span class="date-value"><%= booking.start_date.strftime("%d %b %Y") %></span>
                   </div>
-
-                  <div class="date-separator">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </div>
-
                   <div class="date-item">
                     <span class="date-label">Check-out</span>
-                    <span class="date-value">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                      </svg>
-                      <%= booking.end_date.strftime("%d %b %Y") %>
-                    </span>
+                    <span class="date-value"><%= booking.end_date.strftime("%d %b %Y") %></span>
                   </div>
                 </div>
-
                 <div class="booking-info-grid">
                   <div class="info-item">
-                    <span class="info-label">Duration</span>
-                    <span class="info-value"><%= (booking.end_date - booking.start_date).to_i %> nights</span>
-                  </div>
-
-                  <div class="info-item">
-                    <span class="info-label">Total Price</span>
+                    <span class="info-label">Total</span>
                     <span class="info-value price">€ <%= number_with_precision(booking.total_price, precision: 2) %></span>
-                  </div>
-
-                  <div class="info-item">
-                    <span class="info-label">Booked on</span>
-                    <span class="info-value"><%= booking.created_at.strftime("%d %b %Y") %></span>
                   </div>
                 </div>
               </div>
 
               <div class="booking-actions">
-                <%= link_to apartment_path(booking.apartment), class: "btn-booking view" do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  View Details
-                <% end %>
-
+                <%= link_to "View Details", booking_path(booking), class: "btn-booking view" %>
                 <% if booking.status == 'pending' && booking.start_date > Date.today %>
-                  <%= link_to edit_booking_path(booking), class: "btn-booking edit" do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                    Edit
-                  <% end %>
-
-                  <%= link_to booking_path(booking),
-                      data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to cancel this booking?" },
-                      class: "btn-booking cancel" do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="15" y1="9" x2="9" y2="15"></line>
-                      <line x1="9" y1="9" x2="15" y2="15"></line>
-                    </svg>
-                    Cancel
-                  <% end %>
+                  <%= link_to "Edit", edit_booking_path(booking), class: "btn-booking edit" %>
+                  <%= link_to "Cancel", booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn-booking cancel" %>
                 <% elsif booking.status == 'confirmed' && booking.start_date > Date.today %>
                   <span class="booking-notice">Contact host to modify</span>
                 <% end %>
@@ -147,75 +74,72 @@
         </div>
       <% else %>
         <div class="empty-state">
-          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
           <h3>No bookings yet</h3>
           <p>Start exploring apartments and make your first booking!</p>
-          <%= link_to "Browse Apartments", apartments_path, class: "btn-primary-custom" %>
+          <%= link_to "Browse Apartments", apartments_path, class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>
   <% end %>
 
   <% if @user.host? %>
-    <h2 class="mb-3">My apartments</h2>
-
-    <% if @apartments.any? %>
-      <div class="row">
-        <% @apartments.each do |apartment| %>
-          <div class="col-md-4 mb-3">
-            <div class="card h-100">
-              <div class="card-body">
-                <h5 class="card-title"><%= apartment.title %></h5>
-                <p class="card-text"><%= apartment.address %></p>
-                <p><strong>€ <%= apartment.price %></strong></p>
-                <%= link_to "View", apartment_path(apartment), class: "btn btn-outline-primary btn-sm" %>
+    <div class="host-section">
+      <h2 class="mb-3">My apartments</h2>
+      <% if @apartments.any? %>
+        <div class="row">
+          <% @apartments.each do |apartment| %>
+            <div class="col-md-4 mb-3">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title"><%= apartment.title %></h5>
+                  <p class="card-text"><%= apartment.address %></p>
+                  <p><strong>€ <%= apartment.price %></strong></p>
+                  <%= link_to "View", apartment_path(apartment), class: "btn btn-outline-primary btn-sm" %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <p>You haven't listed any apartments yet.</p>
-    <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <p>You haven't listed any apartments yet.</p>
+      <% end %>
 
-    <h2 class="mt-5 mb-3">Bookings received</h2>
+      <h2 class="mt-5 mb-3">Bookings received</h2>
+      <% if @received_bookings.any? %>
+        <div class="list-group">
+          <% @received_bookings.each do |booking| %>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <h5><%= booking.apartment.title %></h5>
+                <p class="mb-1"><strong>Guest:</strong> <%= booking.user.name || booking.user.email %></p>
+                <p class="mb-1 text-muted"><%= booking.start_date %> to <%= booking.end_date %></p>
+                <p class="mb-0">
+                  <strong>Status:</strong>
+                  <span class="badge bg-<%= status_color(booking.status) %>"><%= booking.status.capitalize %></span>
+                </p>
+              </div>
+              <div class="d-flex gap-2">
+                <% if booking.status == 'pending' %>
+                  <%= link_to "Accept", accept_booking_path(booking), data: { turbo_method: :patch }, class: "btn btn-success btn-sm" %>
+                  <%= link_to "Reject", reject_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm" %>
+                <% end %>
+                <%= link_to "Details", booking_path(booking), class: "btn btn-outline-primary btn-sm" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-muted">No bookings received yet.</p>
+      <% end %>
 
-    <% if @received_bookings.any? %>
-      <div class="list-group">
-        <% @received_bookings.each do |booking| %>
-          <div class="list-group-item">
-            <h5><%= booking.apartment.title %></h5>
-            <p>
-              <strong>Guest:</strong> <%= booking.user.name || booking.user.email %>
-            </p>
-            <p>
-              <strong>From:</strong> <%= booking.start_date %> |
-              <strong>To:</strong> <%= booking.end_date %>
-            </p>
-            <p>
-              <strong>Status:</strong> <%= booking.status %>
-            </p>
-          </div>
-        <% end %>
+      <div class="mt-3">
+        <%= link_to "Manage My Apartments", my_apartments_path, class: "btn btn-outline-primary" %>
       </div>
-    <% else %>
-      <p>No bookings received yet.</p>
-    <% end %>
+    </div>
   <% end %>
 
-  <% if @user.host? %>
-    <%= link_to "My apartments", my_apartments_path, class: "btn btn-outline-primary" %>
-  <% end %>
-
-  <div class="d-flex gap-3 mt-3">
+  <div class="d-flex gap-3 mt-5 pt-3 border-top">
     <%= link_to "Change password", edit_user_registration_path, class: "btn btn-outline-primary" %>
-    <%= link_to "Delete profile", registration_path(current_user),
-        data: { turbo_method: :delete, turbo_confirm: "Are you sure? This action is irreversible." },
-        class: "btn btn-outline-danger" %>
+    <%= link_to "Delete profile", registration_path(current_user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
   </div>
 </div>
