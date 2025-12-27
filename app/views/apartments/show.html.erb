@@ -23,7 +23,7 @@
 </div>
     </div>
 
-    <div class="details-card">
+<div class="details-card">
       <h2>Details</h2>
 
       <div class="detail-line">
@@ -36,35 +36,43 @@
         <span class="detail-value"><%= number_to_currency(@apartment.price, unit: "€", separator: ",", delimiter: ".") %></span>
       </div>
 
+      <% if user_signed_in? && current_user.tenant? %>
+        <div class="booking-form-container mt-4">
+          <h3>Book this apartment</h3>
 
-<% if user_signed_in? && current_user.tenant? %>
-  <div class="booking-form-container mt-4">
-    <h3>Book this apartment</h3>
+          <%# Visualizzazione Errori di validazione %>
+          <% if @booking && @booking.errors.any? %>
+            <div class="alert alert-danger">
+              <ul>
+                <% @booking.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-    <%= form_with model: [@apartment, @booking],
-              local: true,
-              data: { turbo: false } do |f| %>
-      <div class="form-group">
-        <%= f.label :start_date %>
-        <%= f.date_field :start_date, min: Date.today, class: "form-control", required: true %>
-      </div>
+          <%# Unico form corretto %>
+          <%= form_with model: [@apartment, @booking], local: true do |f| %>
+            <div class="form-group mb-2">
+              <%= f.label :start_date %>
+              <%= f.date_field :start_date, min: Date.today, class: "form-control", required: true %>
+            </div>
 
-      <div class="form-group">
-        <%= f.label :end_date %>
-        <%= f.date_field :end_date, min: Date.today + 1, class: "form-control", required: true %>
-      </div>
+            <div class="form-group mb-2">
+              <%= f.label :end_date %>
+              <%= f.date_field :end_date, min: Date.today + 1, class: "form-control", required: true %>
+            </div>
 
-      <%= f.submit "Book now", class: "btn btn-primary mt-2" %>
-    <% end %>
-  </div>
+            <%= f.submit "Book now", class: "btn btn-primary w-100 mt-2" %>
+          <% end %>
+        </div>
 
-<% elsif !user_signed_in? %>
+      <% elsif !user_signed_in? %>
+        <div class="mt-4">
+          <p class="text-muted">Please <%= link_to "log in", new_user_session_path %> to book this apartment.</p>
+        </div>
+      <% end %>
 
-<% end %>
-
-
-
-</div>      </div>
-
-  </div>
-</div>
+    </div> <%# Chiusura details-card %>
+  </div> <%# Chiusura show-content-grid %>
+</div> <%# Chiusura apartment-show-container %>
